@@ -7,13 +7,12 @@
 //
 
 #import "FirstTableViewController.h"
-#import "ResultsTableViewController.h"
+#import "OfficeHoursViewController.h"
 #import <Parse/Parse.h>
 
 @interface FirstTableViewController ()
 
 @property (strong, nonatomic) UISearchController *searchController;
-@property (strong, nonatomic) ResultsTableViewController* resultsController;
 
 @end
 
@@ -21,19 +20,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-//    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-//    self.searchController.searchResultsUpdater = self;
-//    //self.searchController.dimsBackgroundDuringPresentation = NO;
-//    self.searchController.searchBar.scopeButtonTitles = @[NSLocalizedString(@"ScopeButtonCountry",@"Country"),
-//                                                          NSLocalizedString(@"ScopeButtonCapital",@"Capital")];
-//    self.searchController.searchBar.delegate = self;
-//    
-//    self.tableView.tableHeaderView = self.searchController.searchBar;
     
     // Create the search results controller and store a reference to it.
-    self.resultsController = [[ResultsTableViewController alloc] init];
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:self.resultsController];
+    //self.resultsController = [[ResultsTableViewController alloc] init];
+    //self.searchController = [[UISearchController alloc] initWithSearchResultsController:self.resultsController];
+    
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+
     
     // Use the current view controller to update the search results.
     self.searchController.searchResultsUpdater = self;
@@ -54,7 +49,7 @@
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-//    NSString *searchString = searchController.searchBar.text;
+    NSString *searchString = searchController.searchBar.text;
 //    //[self searchForText:searchString scope:searchController.searchBar.selectedScopeButtonIndex];
 //    
 //    //PFQuery *query = [PFQuery queryWithClassName:@"Department"];
@@ -62,43 +57,27 @@
 //    
 //
 //    
-//    self.resultsController.searchThis = searchString;
+    self.searchThis = searchString;
 //    //[self.resultsController queryForTable];
-//    [self.resultsController loadObjects];
+    [self loadObjects];
+    
+        //[self queryForTable];
     
         //[self.tableView reloadData];
-}
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    NSLog(@"Test");
-    NSString *searchString = searchBar.text;
-    //[self searchForText:searchString scope:searchController.searchBar.selectedScopeButtonIndex];
     
-    //PFQuery *query = [PFQuery queryWithClassName:@"Department"];
-    //[query whereKey:@"Department" containsString:searchString];
-    
-    
-    
-    self.resultsController.searchThis = searchString;
-    //[self.resultsController queryForTable];
-    [self.resultsController loadObjects];
-    
-    //[self.tableView reloadData];
-}
-
-- (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    self.resultsController.searchThis = @"0";
-    [self.resultsController loadObjects];
+//    if ([searchString isEqualToString:@""]) {
+//        [self.resultsController clear];
+//    }
 }
 
 - (id)initWithCoder:(NSCoder *)aCoder {
     self = [super initWithCoder:aCoder];
     if (self) {
         // The className to query on
-        self.parseClassName = @"Department";
+        self.parseClassName = @"Professor1";
         
         // The key of the PFObject to display in the label of the default cell style
-        self.textKey = @"department";
+        self.textKey = @"lastName";
     }
     return self;
 }
@@ -106,20 +85,44 @@
 // Override to customize the query to perform on the class. Default is query for
 // all objects ordered by createdAt descending.
 - (PFQuery *)queryForTable {
+//    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+//    [query orderByAscending:@"lastName"];
+//    
+//    return query;
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
-    [query orderByAscending:@"department"];
+    
+    if (self.searchThis == NULL || [self.searchThis isEqualToString:@""]) {
+        
+    } else {
+        [query whereKey:@"lastName" containsString:self.searchThis];
+        NSLog(@"Hello");
+        NSLog(self.searchThis);
+    }
+    
+    [query orderByAscending:@"lastName"];
+    
+    //self.searchThis = @"0";
     
     return query;
 }
 
-/*
-#pragma mark - Navigation
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    if ([indexPath row] > self.objects.count -1 ) {
+        return;
+    } else {
+        [self performSegueWithIdentifier:@"showOfficeHoursDetail" sender:self];
+    }
+}
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+        OfficeHoursViewController *detailViewController = [segue destinationViewController];
+        NSInteger row = [[self tableView].indexPathForSelectedRow row];
+        //detailViewController.segueType = @"normal";
+        detailViewController.professor = [self.objects objectAtIndex:row];
 }
-*/
 
 @end

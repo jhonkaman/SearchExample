@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B51A2731C478B4600AE1120 /* OfficeHoursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B51A2721C478B4600AE1120 /* OfficeHoursViewController.m */; };
 		3B704E2F1C3DFA4E00592F3F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B704E2E1C3DFA4E00592F3F /* main.m */; };
 		3B704E321C3DFA4E00592F3F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B704E311C3DFA4E00592F3F /* AppDelegate.m */; };
 		3B704E381C3DFA4E00592F3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B704E361C3DFA4E00592F3F /* Main.storyboard */; };
@@ -30,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B51A2711C478B4600AE1120 /* OfficeHoursViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfficeHoursViewController.h; sourceTree = "<group>"; };
+		3B51A2721C478B4600AE1120 /* OfficeHoursViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfficeHoursViewController.m; sourceTree = "<group>"; };
 		3B704E2A1C3DFA4E00592F3F /* SearchExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B704E2E1C3DFA4E00592F3F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3B704E301C3DFA4E00592F3F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -103,6 +106,8 @@
 			children = (
 				3B704E5F1C3E5C7F00592F3F /* FirstTableViewController.h */,
 				3B704E601C3E5C7F00592F3F /* FirstTableViewController.m */,
+				3B51A2711C478B4600AE1120 /* OfficeHoursViewController.h */,
+				3B51A2721C478B4600AE1120 /* OfficeHoursViewController.m */,
 				3BE1465B1C3F808900B5F298 /* ResultsTableViewController.h */,
 				3BE1465C1C3F808900B5F298 /* ResultsTableViewController.m */,
 				3B704E301C3DFA4E00592F3F /* AppDelegate.h */,
@@ -218,6 +223,7 @@
 				3B704E321C3DFA4E00592F3F /* AppDelegate.m in Sources */,
 				3B704E2F1C3DFA4E00592F3F /* main.m in Sources */,
 				3B704E611C3E5C7F00592F3F /* FirstTableViewController.m in Sources */,
+				3B51A2731C478B4600AE1120 /* OfficeHoursViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

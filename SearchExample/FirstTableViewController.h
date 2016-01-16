@@ -10,4 +10,6 @@
 
 @interface FirstTableViewController : PFQueryTableViewController <UISearchBarDelegate,UISearchResultsUpdating>
 
+@property (strong, nonatomic) NSString *searchThis;
+
 @end

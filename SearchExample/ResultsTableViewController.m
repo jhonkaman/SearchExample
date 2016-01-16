@@ -7,6 +7,7 @@
 //
 
 #import "ResultsTableViewController.h"
+#import "OfficeHoursViewController.h"
 #import <Parse/Parse.h>
 
 @interface ResultsTableViewController ()
@@ -41,10 +42,10 @@
     self = [super initWithStyle:style];
     if (self) {
     // The className to query on
-    self.parseClassName = @"Department";
+    self.parseClassName = @"Professor1";
     
     // The key of the PFObject to display in the label of the default cell style
-    self.textKey = @"department";
+    self.textKey = @"lastName";
 }
 return self;
 }
@@ -57,15 +58,41 @@ return self;
     if (self.searchThis == NULL || [self.searchThis isEqualToString:@""]) {
         
     } else {
-        [query whereKey:@"department" containsString:self.searchThis];
+        [query whereKey:@"lastName" containsString:self.searchThis];
         NSLog(@"Hello");
         NSLog(self.searchThis);
     }
     
-    [query orderByAscending:@"department"];
+    [query orderByAscending:@"lastName"];
+    
+    //self.searchThis = @"0";
     
     return query;
 }
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [self clear];
+    NSLog(@"Disappear");
+}
+
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+//    if ([indexPath row] > self.objects.count -1 ) {
+//        return;
+//    } else {
+//        [self performSegueWithIdentifier:@"showOfficeHoursDetail" sender:self];
+//    }
+//}
+//
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    // Get the new view controller using [segue destinationViewController].
+//    // Pass the selected object to the new view controller.
+//        OfficeHoursViewController *detailViewController = [segue destinationViewController];
+//        NSInteger row = [[self tableView].indexPathForSelectedRow row];
+//        //detailViewController.segueType = @"normal";
+//        //detailViewController.professor = [self.objects objectAtIndex:row]
+//}
 
 /*
 #pragma mark - Navigation
